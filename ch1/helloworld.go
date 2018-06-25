@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+	"os"
+)
 
 func main() {
-	fmt.Println("Hello, World")
+	fmt.Println(strings.Join(os.Args[1:], " "))
 }
+
+
+
+
+
