@@ -21,7 +21,7 @@ func B() {
 	// 因为panic之后的代码无法执行下去 是无效的
 	defer func() {
 		if err := recover(); err != nil {
-			fmt.Println("Recover in B")
+			fmt.Println("Recover in B", err)
 		}
 	}()
 	panic("Panic in B")
