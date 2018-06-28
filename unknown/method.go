@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// 访问权限由大小写控制 在package级别
+
 type A struct {
 	B
 	Name string
