@@ -6,13 +6,13 @@ import (
 
 type myint int
 
-func (my *myint) Increase() {
-	(*my) += 100
+func (my *myint) Increase(x int) {
+	(*my) += myint(x)
 }
 
 func main() {
 	var a myint = 1
-	a.Increase()
-	a.Increase()
+	a.Increase(100)
+	a.Increase(50)
 	fmt.Println(a)	
 }
