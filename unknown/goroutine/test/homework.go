@@ -11,6 +11,7 @@ func main() {
 	go Go()
 
 	for i:=0; i<10; i++ {
+		// 格式化一个字符串
 		c <- fmt.Sprintf("From main: hello, #%d", i)
 		fmt.Println(<-c)
 	}
