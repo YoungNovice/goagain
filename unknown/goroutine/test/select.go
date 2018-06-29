@@ -2,29 +2,26 @@ package main
 
 import (
 	"fmt"
+	"time"
 )
 
 func main() {
 	c1, c2 := make(chan int), make(chan string)
 	// 在一个goroutine中不断的使用select取值
-	// 只要chan 不被close掉就不会有问题
-	// o := make(chan bool, 2)
 	go func() {
-		a := 1
 		for {
 			// select 一次代码就会结束所以外面要套一个死循环
 			select {
 			case v, ok := <-c1:
 				if !ok {
 					fmt.Println("c1 is not ok")
-					// o <- true
 					break
 				}
+				time.Sleep(2 * time.Second)
 				fmt.Println("c1 is ok and value = ", v)
 			case v, ok := <-c2:
 				if !ok {
 					fmt.Println("c2 is not ok")
-					// o <- true
 					break
 				}
 				fmt.Println("c2 is ok and value = ", v)
@@ -36,15 +33,8 @@ func main() {
 	c2 <- "hi"
 	c1 <- 3
 	c2 <- "hello"
-
-	// 现在只close了c1
-
 	// 不close会造成for死循环 这是正常人的想法 实际上它正常退出了
-	// 不管chan是否被close case始终会运行到 这他么就尴尬了
+	// 他退出不是因为死循环活了 而是主线程结束了
 	// close(c1)
 	// close(c2)
-
-	// for i := 0; i < 2; i++ {
-	// 	<-o
-	// }
 }
