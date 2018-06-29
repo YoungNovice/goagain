@@ -15,8 +15,12 @@ func main () {
 		// 向通道中传递值
 		// 当通道中有值的时候会一直阻塞
 		c <- true
+		// 关闭chan
+		close(c)
 	}()
-	// 取出通道中的值
-	// 当通道中没有值的时候会一直阻塞
-	<- c	
+	// 使用for range 循环取值 死循环
+	// 但是当chan被close时候会跳出循环
+	for v := range c {
+		fmt.Println(v)
+	}
 }
